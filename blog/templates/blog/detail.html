@@ -1,0 +1,64 @@
+{% extends "blog/padre.html" %}
+
+{% load static %}
+
+{% block content %}
+
+ <!-- Page content-->
+ <div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1">{{post.title}}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">{{post.created}}</div>
+                    <!-- Post categories-->
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                    <a href=" {% url 'updatepost' post.slug %} ">
+                        <button class="btn btn-primary">Update!</button>
+                    </a>
+                    <a href=" {% url 'deletepost' post.slug %} ">
+                        <button class="btn btn-danger">Delete!</button>
+                    </a>
+                </header>
+                <!-- Preview image figure-->
+                <figure class="mb-4"><img class="img-fluid rounded" src="{{post.image.url}}" alt="..." /></figure>
+                <!-- Post content-->
+                <section class="mb-5">
+                    <p class="fs-5 mb-4">{{post.body|safe}}</p>
+                    
+                </section>
+            </article>
+           
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+        
+            <h2> Recent Post</h2>
+            
+            {% for post in posts %}
+
+            <div class="card" style="width: 18rem;">
+                <img src="{{post.image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{post.title}}</h5>
+                  <p class="card-text">{{post.body|safe|truncatechars:200}}}</p>
+                  <a href="{% url 'detail' post.slug %}" class="btn btn-primary">Check the Post!</a>
+                </div>
+              </div>
+            <br>
+              
+            {% endfor %}
+           
+        </div>
+    </div>
+</div>
+
+
+
+        
+  {% endblock %}

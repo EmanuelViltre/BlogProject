@@ -1,0 +1,43 @@
+{% extends "blog/padre.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    #cke_id_body{
+        width: 100% !important;
+    }
+    #container{
+        width: 50%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        height: auto;
+        padding: 30px 20px 20px 20px;
+        border-radius: 30px;
+        margin-bottom: 20px;
+
+    }
+    #container h3{
+        text-align: center;
+    }
+
+</style>
+
+<div class = 'container' id = 'container'>
+
+    <h3><strong> Upload Avatar </strong></h3>  
+
+
+        <form action="{% url 'uploadAvatar' %}"  method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        
+            {{ form.as_p }}
+            {{form.media}}
+
+            <button type="submit">Upload!</button>
+        
+        </form>
+        
+</div>
+</form>
+
+  {% endblock %}
